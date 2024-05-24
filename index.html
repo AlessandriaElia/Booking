@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking.com - Trova il tuo alloggio ideale</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Booking.com</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Soggiorni</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Voli</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Volo + hotel</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Noleggio auto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Attrazioni</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Taxi da/per l'aeroporto</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Registra la tua struttura</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Iscriviti</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Accedi</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Search Section -->
+    <div class="container mt-5">
+        <h1 class="text-center">Trova l'alloggio che fa per te</h1>
+        <p class="text-center">Cerca offerte su hotel, case e tanto altro...</p>
+        <form class="search-form">
+            <div class="form-row justify-content-center">
+                <div class="col-md-3">
+                    <input type="text" class="form-control" placeholder="Dove vuoi andare?" required>
+                </div>
+                <div class="col-md-2">
+                    <input type="date" class="form-control" placeholder="Data check-in" required>
+                </div>
+                <div class="col-md-2">
+                    <input type="date" class="form-control" placeholder="Data check-out" required>
+                </div>
+                <div class="col-md-2">
+                    <input type="number" class="form-control" placeholder="Adulti" min="1" max="10" required>
+                </div>
+                <div class="col-md-2">
+                    <input type="number" class="form-control" placeholder="Bambini" min="0" max="10">
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary">Cerca</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Offers Section -->
+    <div class="container mt-5">
+        <h2 class="text-center">Offerte</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="https://via.placeholder.com/150" class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Vola verso la tua vacanza ideale</h5>
+                                <p class="card-text">Lasciati ispirare e poi confronta e prenota voli con più flessibilità</p>
+                                <a href="#" class="btn btn-primary">Cerca voli</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="https://via.placeholder.com/150" class="card-img" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Stai organizzando un viaggio per i Giochi Estivi 2024?</h5>
+                                <p class="card-text">Bruxelles si trova a breve distanza in treno dal cuore dell'evento</p>
+                                <a href="#" class="btn btn-primary">Scopri Bruxelles</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
