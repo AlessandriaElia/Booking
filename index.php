@@ -7,7 +7,14 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <body>
+    <?php
+	require_once('server/mysqli.php');
+	$conn = apriConnessione("booking");
+	?>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="#">Booking.com</a>
@@ -56,7 +63,19 @@
         <form class="search-form">
             <div class="form-row justify-content-center">
                 <div class="col-md-3">
-                    <input type="text" class="form-control" placeholder="Dove vuoi andare?" required>
+                    <select class="form-control" required placeholder="Seleziona una città">
+                        <?php
+                        $sql = "SELECT *
+                        FROM citta";
+                        $data = eseguiQuery($conn, $sql);
+
+                        echo($data);
+
+                        foreach ($data as $item) {
+                            echo("<option value='$item[cBanca]'>$item[Nome]</option>");
+                        }
+                        ?>
+                    </select>
                 </div>
                 <div class="col-md-2">
                     <input type="date" class="form-control" placeholder="Data check-in" required>
@@ -116,8 +135,9 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <?php
+	$conn->close();
+	?>
 </body>
 </html>
