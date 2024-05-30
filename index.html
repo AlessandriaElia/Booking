@@ -6,6 +6,8 @@
     <title>Booking.com - Trova il tuo alloggio ideale</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
@@ -14,6 +16,9 @@
     <script src="lib/axios@1.1.2.min.js"></script>
     <script src="lib/jquery-3.5.1.min.js"></script>
     <script src="lib/libreria.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <body>
 
     <!-- Navbar -->
@@ -69,11 +74,12 @@
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <input type="date" class="form-control" placeholder="Data check-in" required>
+                    <input type="text" class="form-control datepicker" id="check-in" placeholder="Check-in" required>
                 </div>
                 <div class="col-md-2">
-                    <input type="date" class="form-control" placeholder="Data check-out" required>
+                    <input type="text" class="form-control datepicker" id="check-out" placeholder="Check-out" required>
                 </div>
+                
                 <div class="col-md-2">
                     <input type="number" class="form-control" placeholder="Adulti" min="1" max="10" required>
                 </div>
@@ -88,43 +94,28 @@
     </div>
 
     <!-- Offers Section -->
-    <div class="container mt-5">
-        <h2 class="text-center">Offerte</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/150" class="card-img" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Vola verso la tua vacanza ideale</h5>
-                                <p class="card-text">Lasciati ispirare e poi confronta e prenota voli con più flessibilità</p>
-                                <a href="#" class="btn btn-primary">Cerca voli</a>
-                            </div>
-                        </div>
+<div class="container mt-5">
+    <h2 class="text-center">Offerte</h2>
+    <div class="row justify-content-center"> 
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="img/langhe.webp" class="card-img" alt="...">
                     </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card mb-3">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/150" class="card-img" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Stai organizzando un viaggio per i Giochi Estivi 2024?</h5>
-                                <p class="card-text">Bruxelles si trova a breve distanza in treno dal cuore dell'evento</p>
-                                <a href="#" class="btn btn-primary">Scopri Bruxelles</a>
-                            </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Stai organizzando un viaggio nelle langhe?</h5>
+                            <p class="card-text">Barolo si trova nel cuore delle Langhe</p>
+                            <button class="btn btn-primary">Scopri Barolo</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 
 </body>
 </html>

@@ -1,31 +1,49 @@
 body {
-    background-color: #f5f5f5;
+    background-color: #fff5e6; 
 }
 
 .navbar {
-    background-color: #007bff;
+    background-color: #cc7a00!important;
 }
 
 .nav-link {
-    color: #ffffff !important;
+    color: #ffffff !important; 
 }
 
 .nav-link:hover {
-    color: #ffdd57 !important;
+    color: #f4b042 !important;
 }
 
 h1, h2 {
-    color: #333;
+    color: #503000; 
 }
 
 .search-form .form-control {
     margin-bottom: 10px;
+    background-color: #ffffff; 
+    color: #333; 
+    border: 1px solid #d6a67c; 
+}
+
+.card {
+    background-color: #ffe6cc; 
+    border-color: #d6a67c; 
 }
 
 .card-title {
-    color: #007bff;
+    color: #cc7a00; 
 }
 
 .card-text {
-    color: #555;
+    color: #666; 
 }
+
+button.btn-primary {
+    background-color: #cc7a00; 
+    border-color: #b36500;
+}
+
+button.btn-primary:hover {
+    background-color: #b36500;
+}
+
