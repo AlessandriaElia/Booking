@@ -17,7 +17,13 @@ $(document).ready(function() {
     btnCerca.on("click", cercaHotel);
 
     function cercaHotel(){
-        alert("CIAO CARA");
+        const citta = selectCitta.val();
+        const checkIn = $checkInDate.val();
+        const checkOut = $checkOutDate.val();
+        const adults = $adults.val();
+        const children = $children.val() || 0;
+
+        console.log(citta, checkIn, checkOut, adults, children);
     }
 
 })
