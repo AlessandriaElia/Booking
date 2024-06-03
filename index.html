@@ -62,7 +62,7 @@
         </div>
     </nav>
 
-    <!-- Search Section -->
+ <!-- ******************* Sezione ricerca ******************** -->
     <div class="container mt-5">
         <h1 class="text-center">Trova l'alloggio che fa per te</h1>
         <p class="text-center">Cerca offerte su hotel, case e tanto altro...</p>
@@ -93,7 +93,7 @@
         </form>
     </div>
 
-    <!-- Offers Section -->
+<!-- ******************* Sezione Offerte ******************** -->
 <div class="container mt-5">
     <h2 class="text-center">Offerte</h2>
     <div class="row justify-content-center"> 
@@ -116,12 +116,61 @@
     </div>
 </div>
 
-<!-- Hidden Hotel List Section -->
+<!-- ******************* Lista Hotel ******************** -->
 <div id="hotelListSection" class="container mt-5" style="display: none;">
     <h2 class="text-center">Hotel Disponibili</h2>
     <br>
     <div id="hotelList" class="row">
-        <!-- Gli hotel verranno aggiunti qui dinamicamente -->
+    </div>
+</div>
+
+<!-- ******************* Prenotazione ******************** -->
+<div class="row" id="prenotazione">
+    <div class="col-sm-12 booking">
+        <h2> Fai la tua prentazione</h2> 
+        <div> 
+           <span>Matteo Lotito</span>
+           <img src="img/utenti/matteoLotito.jpg"> </img>
+        </div>
+    </div>
+
+    <div class="col-sm-4 col-md-3 scegliDate">
+        <p>
+           <span>check-in</span><br>
+           <input type="date" min="2024-01-01" max="2024-12-3" style="width:140px;" id="dataInizio">
+        </p>
+        <p>
+           <span>check-out</span><br>
+           <input type="date" disabled max="2024-12-31"  style="width:140px;" id="dataFine">
+        </p>
+        <p>
+           <span>numero persone</span><br>
+           <input type="number" min="1" max="5" value="2" style="width:100%" id="numeroPersone">
+        </p>
+        <p>
+           <br>
+           <input type="button" class="btn btn-primary" value="Prenota ora" style="width:100%" id="btnPrenota">
+        </p>
+    </div>
+    <div class="col-sm-8 col-md-9 dettagli">
+        <!--
+        <h3>Hotel Langhe </h3>
+        <p>Strada Profonda 21 - 12051 Alba </p>
+        <div>
+            <img src="img/hotels/HotelLanghe1.jpg">
+            <img src="img/hotels/HotelLanghe2.jpg">
+            <img src="img/hotels/HotelLanghe3.jpg">		
+        </div>
+        <div>
+            <p>Questo incantevole hotel, ospitato in un cascinale ristrutturato e circondato da un rigoglioso giardino, dista 2,6 km dal Duomo di Alba e 10 km dal Castello di Grinzane Cavour</p>
+            <h3>Tariffe</h3>
+            <p>dal 01-01-2024 al 15-03-2024 € 85</p>
+            <p>dal 16-03-2024 al 10-06-2024 € 95</p>
+            <p>dal 11-06-2024 al 10-09-2024 € 119</p>
+            <p>dal 11-09-2024 al 15-10-2024 € 99</p>
+            <p>dal 16-10-2024 al 31-12-2024 € 80</p>
+        </div>
+        -->
     </div>
 </div>
 

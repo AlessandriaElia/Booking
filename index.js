@@ -7,6 +7,8 @@ $(document).ready(function () {
     const $checkOutDate = $("#check-out");
     const $adults = $('input[type="number"][placeholder="Adulti"]');
     const $children = $('input[type="number"][placeholder="Bambini"]');
+    const sezPrenotazione = $("#prenotazione");
+    sezPrenotazione.hide();
 
 
     const checkInPicker = flatpickr("#check-in", {
@@ -81,19 +83,23 @@ $(document).ready(function () {
                                 <div>${stelle}</div>
                                 <p class="card-text">${hotel['descrizione']}</p>
                                 <div class="prezzo-tag">Prezzi a partire da ${data["prezzoMinimo"]} € a notte</div>
-                                <button class="btn btn-primary">Dettagli</button>
+                                <button class="btn btn-primary" data-id="${hotel['codHotel']}">Dettagli</button>
                             </div>
                         </div>
-                    </div>
-    `);
+                    </div>`);
                 })
-                
-
             });
-
             $("#hotelListSection").show();
         })
     }
+    $(document).on('click', '.btn-primary', function() {
+        var hotelId = $(this).data('id');
+        
+        $("#hotelListSection").hide();
+
+        
+        sezPrenotazione.show();
+    });
 
 
 });
