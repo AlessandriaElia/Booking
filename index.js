@@ -8,6 +8,11 @@ $(document).ready(function () {
     const $adults = $('input[type="number"][placeholder="Adulti"]');
     const $children = $('input[type="number"][placeholder="Bambini"]');
     const sezDettagli = $("#prenotazione");
+    let citta;
+    let checkIn;
+    let checkOut;
+    let adults;
+    let children;
     sezDettagli.hide();
     $("#Aaccedi").show();
 
@@ -67,11 +72,11 @@ $(document).ready(function () {
     function cercaHotel(event) {
         event.preventDefault(); //sennó mi resettava il form
 
-        const citta = selectCitta.val();
-        const checkIn = $checkInDate.val();
-        const checkOut = $checkOutDate.val();
-        const adults = $adults.val();
-        const children = $children.val() || 0;
+         citta = selectCitta.val();
+         checkIn = $checkInDate.val();
+         checkOut = $checkOutDate.val();
+         adults = $adults.val();
+         children = $children.val() || 0;
 
         console.log(citta, checkIn, checkOut, adults, children);
 
@@ -150,19 +155,23 @@ $(document).ready(function () {
                 detailsDiv.append($("<p>").text(hotel["descrizione"]));
                 detailsDiv.append($("<h4>").text("Tariffe"));
     
-                // Aggiunta delle tariffe
-                for (const prezzo of data) {
-                    detailsDiv.append($("<p>").text(`dal ${new Date(prezzo["dataInizio"]).toLocaleDateString()} al ${new Date(prezzo["dataFine"]).toLocaleDateString()} € ${prezzo["prezzo"]}`));
-                }
+                /* Aggiunta delle tariffe */
+                rq = inviaRichiesta("GET", "server/getTariffe.php", { codHotel: hotel["codHotel"] })
+                rq.catch(errore);
+                rq.then(function({data}){
+                    for (const prezzo of data) {
+                        detailsDiv.append($("<p>").text(`dal ${new Date(prezzo["dataInizio"]).toLocaleDateString()} al ${new Date(prezzo["dataFine"]).toLocaleDateString()} € ${prezzo["prezzo"]}`));
+                    }
+                })
+                
                 detailsContainer.append(detailsDiv);
+                
+                $("#checkIn2").val(checkIn);
+                $("#checkOut2").val(checkOut);
+                let sommaP = parseInt(adults) + parseInt(children);
+                $("#numeroPersone").val(sommaP);
             });
         });
-        $("#checkIn2").prop("disabled", true).val($checkInDate);
-        $("#checkOut2").prop("disabled", true).val($checkOutDate);
 
-        
     }
-    
-
-
 });
