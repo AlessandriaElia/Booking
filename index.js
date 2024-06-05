@@ -8,11 +8,13 @@ $(document).ready(function () {
     const $adults = $('input[type="number"][placeholder="Adulti"]');
     const $children = $('input[type="number"][placeholder="Bambini"]');
     const sezDettagli = $("#prenotazione");
+    let tipoStanza;
     let citta;
     let checkIn;
     let checkOut;
     let adults;
     let children;
+    let prezzoStimato = 0;
     sezDettagli.hide();
     $("#Aaccedi").show();
 
@@ -72,6 +74,7 @@ $(document).ready(function () {
     function cercaHotel(event) {
         event.preventDefault(); //sennó mi resettava il form
 
+        sezDettagli.hide();
          citta = selectCitta.val();
          checkIn = $checkInDate.val();
          checkOut = $checkOutDate.val();
@@ -85,9 +88,6 @@ $(document).ready(function () {
         rq.then(function ({ data }) {
             console.log(data);
             $("#hotelList").empty();
-
-
-
             data.forEach(function (hotel) {
                 let stelle = "";
                 for (let i = 0; i < hotel['stelle']; i++) {
@@ -131,13 +131,11 @@ $(document).ready(function () {
         rq.then(function ({ data }) {
             data.forEach(function (hotel) {
                 const detailsContainer = $("#detailsContainer");
-                detailsContainer.empty(); // Pulisce la sezione dei dettagli prima di aggiungere nuovi contenuti
-    
-                // Nome dell'hotel e indirizzo
+                detailsContainer.empty(); 
+     
                 detailsContainer.append($("<h4>").addClass("text-center").text(hotel["nomeHotel"]));
                 detailsContainer.append($("<p>").addClass("text-center").text(hotel["indirizzo"]));
     
-                // Div per contenere le immagini
                 const imgDiv = $("<div>", { class: "d-flex justify-content-center" });
                 for (let i = 0; i < 3; i++) {
                     const img = $("<img>", {
@@ -150,19 +148,67 @@ $(document).ready(function () {
                 }
                 detailsContainer.append(imgDiv);
     
-                // Div per contenere la descrizione e le tariffe
                 const detailsDiv = $("<div>", { class: "mt-3" });
                 detailsDiv.append($("<p>").text(hotel["descrizione"]));
+
+                detailsDiv.append($("<h4>")).text("Stanze disponibili: ");
+                const select = $("<select>", { class: "form-control" }).css("width", "30%").appendTo(detailsDiv);
+                let option = $("<option>").val("stanzeSingole").text(`Stanze singole (${hotel["stanzeSingole"]})`).appendTo(select);
+                option = $("<option>").val("stanzeDoppie").text(`Stanze Doppie (${hotel["stanzeDoppie"]})`).appendTo(select);
+                option = $("<option>").val("stanzeTriple").text(`Stanze Triple (${hotel["stanzeTriple"]})`).appendTo(select);
+                option = $("<option>").val("stanzeQuadruple").text(`Stanze Quadruple (${hotel["stanzeQuadruple"]})`).appendTo(select);
+                option = $("<option>").val("suites").text(`Suites (${hotel["suites"]})`).appendTo(select).append($("<br>"));
+                
+                select.on("change", function(){
+                    if(select.val()=="stanzeSingole")
+                        {
+                            tipoStanza = "stanzeSingole"
+                            prezzoStimato = prezzoStimato+ 20;
+                        }
+                    else if(select.val()=="stanzeDoppie"){
+                            tipoStanza = "stanzeDoppie"
+                            prezzoStimato  = prezzoStimato+ 40;
+                        }
+                    else if(select.val()=="stanzeTriple"){
+                            tipoStanza = "stanzeTriple"
+                            prezzoStimato = prezzoStimato+ 60;
+                        }
+                    else if(select.val()=="stanzeQuadruple"){
+                            tipoStanza = "stanzeQuadruple"
+                            prezzoStimato  = prezzoStimato+ 80;
+                        }
+                    else if(select.val()=="suites"){
+                            tipoStanza = "suites"
+                            prezzoStimato = prezzoStimato+100;
+                        } 
+                        console.log(prezzoStimato); 
+                        $("#pPrezzo").text(`Prezzo: ${prezzoStimato}€`);   
+                })
+                select.prop("selectedIndex", -1);
+                
+
                 detailsDiv.append($("<h4>").text("Tariffe"));
-    
-                /* Aggiunta delle tariffe */
                 rq = inviaRichiesta("GET", "server/getTariffe.php", { codHotel: hotel["codHotel"] })
                 rq.catch(errore);
                 rq.then(function({data}){
                     for (const prezzo of data) {
-                        detailsDiv.append($("<p>").text(`dal ${new Date(prezzo["dataInizio"]).toLocaleDateString()} al ${new Date(prezzo["dataFine"]).toLocaleDateString()} € ${prezzo["prezzo"]}`));
+                        if(checkIn>=prezzo["dataInizio"]&&checkIn<=prezzo["dataFine"]){
+                            var date1 = new Date(checkIn);
+                            var date2 = new Date(checkOut);
+                            
+                            var timeDiff = Math.abs(date1.getTime() - date2.getTime());
+                            var diffDays = Math.ceil(parseInt((date2 - date1) / (24 * 3600 * 1000)));
+                            console.log(diffDays);
+                            prezzoStimato = parseInt(prezzo["prezzo"])*diffDays;
+                            console.log(prezzoStimato);
+                            $("#pPrezzo").text(`Prezzo: ${prezzoStimato}€`);
+                        }
+                        
+                        detailsDiv.append($("<p>").text(`dal ${new Date(prezzo["dataInizio"]).toLocaleDateString()} al ${new Date(prezzo["dataFine"]).toLocaleDateString()} € ${prezzo["prezzo"]}`));    
                     }
                 })
+                
+                
                 
                 detailsContainer.append(detailsDiv);
                 
@@ -172,6 +218,5 @@ $(document).ready(function () {
                 $("#numeroPersone").val(sommaP);
             });
         });
-
     }
 });

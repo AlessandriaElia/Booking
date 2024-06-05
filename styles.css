@@ -85,7 +85,7 @@ button.btn-primary:hover {
 	margin:4px 15px;
 }
 .hotel>div>div h4 span{
-	color:#00C;
+	color:#cc7a00;
 	font-weight:bold;
 	font-size:1em;
 	vertical-align:middle;
@@ -113,7 +113,7 @@ button.btn-primary:hover {
 
 .booking {
     padding: 12px;
-    background-color: rgb(0, 59, 149);
+    background-color: #cc7a00;
     margin-bottom: 16px;
 }
 
@@ -169,7 +169,9 @@ button.btn-primary:hover {
     height: 150px;
     object-fit: cover;
 }
-
+.scegliDate span{
+    font-size: 15pt;
+}
 
 
 
