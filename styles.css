@@ -69,3 +69,110 @@ button.btn-primary:hover {
 }
 
 
+
+/* ************************************ */
+.hotel>div{
+	border:1px solid #bbb;
+	margin:10px 0;
+	padding:16px;
+	display:flex;
+	
+}
+.hotel>div>img{
+	height:160px; 
+}
+.hotel>div>div{
+	margin:4px 15px;
+}
+.hotel>div>div h4 span{
+	color:#00C;
+	font-weight:bold;
+	font-size:1em;
+	vertical-align:middle;
+	margin-right:5px;
+}
+.hotel>div>div h4 img{
+	width:24px;
+	margin:-2px;
+	vertical-align:middle;
+}
+.hotel>div>div p{
+	font-size:0.8em;	
+}
+.hotel>div>div a{
+	float:right;
+}
+.prezzo{
+	color:#0A0;
+	font-weight:bold;
+	font-size:1.1em;
+	padding-left:5px;
+	padding-right:5px;
+}
+
+
+.booking {
+    padding: 12px;
+    background-color: rgb(0, 59, 149);
+    margin-bottom: 16px;
+}
+
+.booking * {
+    color: white;
+}
+
+.booking h2 {
+    float: left;
+}
+
+.booking span {
+    float: right;
+    vertical-align: middle;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.booking img {
+    float: right;
+    width: 50px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+/* ************************************ */
+.scegliDate {
+    background-color: rgb(255, 183, 0);
+    padding: 16px;
+}
+
+.scegliDate > * {
+    font-size: 0.8em;
+}
+
+/* ************************************ */
+.dettagli h3 {
+    font-weight: bold;
+}
+
+.dettagli img {
+    height: 160px;
+    margin-right: 10px;
+}
+
+.dettagli > div:nth-of-type(2) {
+    margin-top: 20px;
+}
+
+/* ************************************ */
+.dettagli .img-thumbnail {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+}
+
+
+
+
+
+
+

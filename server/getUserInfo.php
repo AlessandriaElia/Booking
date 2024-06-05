@@ -4,7 +4,7 @@ require_once("mysqli.php");
 
 // Se il session id ricevuto tramite cookie esiste viene agganciato, altrimenti viene creato
 session_start();
-if(!isset($_SESSION["cCorrentista"])) {
+if(!isset($_SESSION["codUtente"])) {
     http_response_code(403);
     die("Sessione inesistente");
 }
@@ -18,13 +18,13 @@ $_SESSION["scadenza"] = time() + $SCADENZA;
 setcookie(session_name(), session_id(), $_SESSION["scadenza"], "/");
 
 $conn = apriConnessione("booking");
-
+$utente = $_SESSION["codUtente"];
 $sql = "SELECT *
-        FROM correntisti
-        WHERE cCorrentista = $cCorrentista";
-$correntista = eseguiQuery($conn, $sql);
+        FROM utenti
+        WHERE codUtente = $codUtente";
+$utente = eseguiQuery($conn, $sql);
 
-$response = array("user"=>$correntista[0]["NomeCognome"], "filiali"=>$data);
+$response = array("user"=>$utente[0]["username"]);
 
 http_response_code(200);
 echo (json_encode($response));

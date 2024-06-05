@@ -48,18 +48,18 @@
                     <a class="nav-link" href="#">Taxi da/per l'aeroporto</a>
                 </li> -->
             </ul>
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto" id="sessionNav">
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Registra la tua struttura</a>
                 </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="_registrazione.html" id="Aregistrati">Registrati</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.html" id="Aaccedi">Accedi</a>
+                <li class="nav-item" >
+                    <a class="nav-link" href="login.html" id="Aaccedi"style="display: none">Accedi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="Alogout">Logout</a>
+                    <a class="nav-link" href="#" id="Alogout"style="display: none">Logout</a>
                 </li>
             </ul>
         </div>
@@ -128,15 +128,18 @@
 </div>
 
 <!-- ******************* Prenotazione ******************** -->
+<!-- ******************* Prenotazione ******************** -->
 <div id="prenotazione" class="container mt-5" style="display: none;">
     <div class="row">
         <div class="col-sm-12 booking">
             <h2> Fai la tua prentazione</h2> 
             <div> 
                <span>Matteo Lotito</span>
-               <img src="img/utenti/matteoLotito.jpg"> </img>
+               <img src="img/utenti/matteoLotito.jpg"> 
             </div>
         </div>
+    </div>
+    <div class="row">
         <div class="col-sm-4 col-md-3 scegliDate">
             <p>
                <span>check-in</span><br>
@@ -144,7 +147,7 @@
             </p>
             <p>
                <span>check-out</span><br>
-               <input type="date" disabled max="2024-12-31"  style="width:140px;" id="dataFine">
+               <input type="date" disabled max="2024-12-31" style="width:140px;" id="dataFine">
             </p>
             <p>
                <span>numero persone</span><br>
@@ -155,31 +158,12 @@
                <input type="button" class="btn btn-primary" value="Prenota ora" style="width:100%" id="btnPrenota">
             </p>
         </div>
-        <div class="col-sm-8 col-md-9 dettagli">
-            <!--
-            <h3>Hotel Langhe </h3>
-            <p>Strada Profonda 21 - 12051 Alba </p>
-            <div>
-                <img src="img/hotels/HotelLanghe1.jpg">
-                <img src="img/hotels/HotelLanghe2.jpg">
-                <img src="img/hotels/HotelLanghe3.jpg">		
-            </div>
-            <div>
-                <p>Questo incantevole hotel, ospitato in un cascinale ristrutturato e circondato da un rigoglioso giardino, dista 2,6 km dal Duomo di Alba e 10 km dal Castello di Grinzane Cavour</p>
-                <h3>Tariffe</h3>
-                <p>dal 01-01-2024 al 15-03-2024 € 85</p>
-                <p>dal 16-03-2024 al 10-06-2024 € 95</p>
-                <p>dal 11-06-2024 al 10-09-2024 € 119</p>
-                <p>dal 11-09-2024 al 15-10-2024 € 99</p>
-                <p>dal 16-10-2024 al 31-12-2024 € 80</p>
-            </div>
-            -->
+        <div class="col-sm-8 col-md-9 dettagli" id="detailsContainer">
+            <!-- Dettagli dell'hotel saranno aggiunti qui -->
         </div>
+    </div>
 </div>
 
-
-    
-</div>
 
 
 </body>
