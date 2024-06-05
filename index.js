@@ -1,6 +1,10 @@
 "use strict";
 $(document).ready(function () {
-
+    let rq /*= inviaRichiesta("GET", "server/checkSession.php");
+    rq.catch(errore);
+    rq.then(function({data}){
+        console.log(data);
+    })*/
     const selectCitta = $('.form-control[required]');
     const btnCerca = $("#btnCerca");
     const $checkInDate = $("#check-in");
@@ -26,7 +30,7 @@ $(document).ready(function () {
             window.location.href = "login.html"
         })
     })
-
+    $("#btnPrenota").on("click", function(){prenota()})
     //let rq = inviaRichiesta("GET","server/getUserInfo");
     //rq.catch(errore);
     //rq.then(function({data}){
@@ -57,15 +61,13 @@ $(document).ready(function () {
     });
 
 
-    let rq = inviaRichiesta("GET", "server/getCitta.php");
+    rq = inviaRichiesta("GET", "server/getCitta.php");
     rq.catch(errore);
     rq.then(function ({ data }) {
         console.log(data);
         data.forEach(citta => {
             const option = $("<option>").val(citta["citta"]).text(citta["citta"]);
             option.appendTo(selectCitta);
-
-
         });
     });
 
@@ -125,7 +127,7 @@ $(document).ready(function () {
         $("#hotelListSection").hide();
         $("#prenotazione").show();
         console.log(codHotel);
-    
+        
         let rq = inviaRichiesta("GET", "server/getDetails.php", { codHotel });
         rq.catch(errore);
         rq.then(function ({ data }) {
@@ -209,14 +211,47 @@ $(document).ready(function () {
                 })
                 
                 
-                
-                detailsContainer.append(detailsDiv);
-                
                 $("#checkIn2").val(checkIn);
                 $("#checkOut2").val(checkOut);
                 let sommaP = parseInt(adults) + parseInt(children);
                 $("#numeroPersone").val(sommaP);
+                
+                rq = inviaRichiesta("GET", "server/getReviews.php",  { codHotel: hotel["codHotel"] });
+                rq.catch(errore);
+                rq.then(function({ data }) {
+                    console.log("REVIEW", data);
+                    const reviewsContainer = $("<div>").addClass("mt-3").appendTo(detailsDiv);
+                    reviewsContainer.empty(); // Pulisce il contenitore prima di aggiungere nuovi contenuti
+                    
+                    data.forEach(review => {
+                        const reviewCard = $("<div>", { class: "card mb-3" });
+                        const cardBody = $("<div>", { class: "card-body" });
+                        
+                        // Intestazione della recensione
+                        const cardHeader = $("<div>", { class: "card-header" });
+                        const title = $("<h5>", { class: "card-title" }).text(`Recensione #${review.id}`);
+                        let stelle = "";
+                        for (let i = 0; i <review['stelle']; i++) {
+                            stelle += `<img src="star.png" style='width:33px; height:33px'>`;
+                        }
+                        cardHeader.append(title, stelle);
+                
+                        // Corpo della recensione
+                        const text = $("<p>", { class: "card-text" }).text(review.testoRecensione);
+                        const footer = $("<div>", { class: "card-footer text-muted" }).text(`Data: ${new Date(review.data).toLocaleString()}`);
+                        
+                        cardBody.append(text);
+                        reviewCard.append(cardHeader, cardBody, footer);
+                        reviewsContainer.append(reviewCard);
+                        reviewsContainer.appendTo(detailsDiv);
+                    });
+                });
+                detailsContainer.append(detailsDiv);
+                
             });
         });
+    }
+    function prenota(){
+        alert("PO PO POVERI");
     }
 });

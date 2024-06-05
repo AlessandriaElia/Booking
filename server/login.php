@@ -18,10 +18,8 @@ if (count($data) == 0) {
     http_response_code(401);
     die("password non valida");
 } else {
-    session_start();
+    createSession();
     $_SESSION["codUtente"] = $data[0]["codUtente"];
-    $_SESSION["scadenza"] = time() + $SCADENZA;
-    setcookie(session_name(), session_id(), $_SESSION["scadenza"], "/");
 }
 
 http_response_code(200);

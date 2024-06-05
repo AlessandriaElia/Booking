@@ -1,8 +1,8 @@
 <?php
+define("SCADENZA", 300);
 
-$SCADENZA = 300;
-
-function apriConnessione($DBName) {
+function apriConnessione($DBName)
+{
     define("DB_HOST", "localhost");
     define("DB_USER", "root");
     define("DB_PASS", "");
@@ -19,8 +19,9 @@ function apriConnessione($DBName) {
     }
 }
 
-function eseguiQuery($conn, $sql) {
-        try {
+function eseguiQuery($conn, $sql)
+{
+    try {
         $rs = $conn->query($sql);
         if (!is_bool($rs)) {
             //Questa riga partendo da $rs restituisce un vettore enumerativo di JSON
@@ -36,13 +37,34 @@ function eseguiQuery($conn, $sql) {
     }
 }
 
-function getValidParameter($parameter, $conn) {
-    if(isset($_REQUEST[$parameter]) && $_REQUEST[$parameter] != null) {
+function getValidParameter($parameter, $conn = null)
+{
+    if (isset($_REQUEST[$parameter]) && $_REQUEST[$parameter] != null) {
         return $_REQUEST[$parameter];
-    }
-    else{
+    } else {
         http_response_code(400);
-        $conn->close();
+        if($conn) {
+            $conn->close();
+        }
         die("Missing parameter: $parameter");
     }
+}
+
+function checkSession() {
+    // Se il session id ricevuto tramite cookie esiste viene agganciato, altrimenti viene creato
+    session_start();
+    if (!isset($_SESSION["scadenza"]) || time() > $_SESSION["scadenza"]) {
+        session_unset(); // Rimuove tutte le variabili di sessione
+        session_destroy();
+        http_response_code(403);
+        die("Expired session");
+    }
+    $_SESSION["scadenza"] = time() + SCADENZA;
+    setcookie(session_name(), session_id(), $_SESSION["scadenza"], "/");
+}
+
+function createSession() {
+    session_start();
+    $_SESSION["scadenza"] = time() + SCADENZA;
+    setcookie(session_name(), session_id(), $_SESSION["scadenza"], "/");
 }
