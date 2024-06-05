@@ -1,0 +1,7 @@
+
+
+.icona-rossa{
+	color: #dc3545;  /* colore usato da is-invalid */
+	border:1px solid #dc3545; 
+	border-right:transparent;
+}

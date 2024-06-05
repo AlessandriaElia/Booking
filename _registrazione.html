@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Registrazione</title>
+	<link rel="icon" href="img/icoVallauri.png" type="image/png" />
+		
+	<!-- bootstrap 4 -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>		
+	<script src="libreria.js"></script>
+	<script src="_registrazione.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<form class="form-group" style="padding-top:5%">
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4">
+				
+				<h1>Registrati:</h1>						
+				</br>
+			
+				Cognome:
+				<div class="form-group input-group" id="txtCognome">
+					<span class="input-group-text"><i class="fas fa-user"></i></span>
+					<input class="form-control" name="txtCognome" type="text" placeholder="Cognome">
+				</div>
+				
+				Nome:
+				<div class="form-group input-group" id="txtNome">
+					<span class="input-group-text"><i class="fas fa-user"></i></span>
+					<input class="form-control" name="txtNome" type="text" placeholder="Nome">
+				</div>
+				
+				Comune Residenza:
+				<div class="form-group input-group" id="txtIndirizzo">
+					<span class="input-group-text"><i class="fas fa-map-marker"></i></span>
+					<select class="form-control" name="lstComune">	</select>
+				</div>
+				
+				Telefono:
+				<div class="form-group input-group" id="txtTelefono">
+					<span class="input-group-text"><i class="fas fa-phone"></i></span>
+					<input class="form-control" name="txtTelefono" type="text" placeholder="Telefono">
+				</div>
+				
+				Mail:
+				<div class="form-group input-group" id="txtMail">
+					<span class="input-group-text"><i class="fas fa-envelope"></i></span>
+					<input class="form-control" name="txtMail" type="text" placeholder="Mail">
+				</div>
+				
+				Iban:
+				<div class="form-group input-group" id="txtIban">
+					<span class="input-group-text"><i class="fas fa-id-card"></i></span>
+					<input class="form-control" name="txtIban" type="text" placeholder="Iban">
+				</div>
+				
+				Username:
+				<div class="form-group input-group"  id="txtUsername">
+					<span class="input-group-text"><i class="fas fa-user"></i></span>
+					<input class="form-control" name="txtUsername" type="text" placeholder="Username">
+				</div>
+				
+				Password:
+				<div class="form-group input-group" id="txtPassword">
+					<span class="input-group-text"><i class="fas fa-lock"></i></span>
+					<input class="form-control" name="txtPassword" type="password" placeholder="Password">
+				</div>
+				
+				Conferma password:
+				<div class="form-group input-group" id="txtConfermaPassword">
+					<span class="input-group-text"><i class="fas fa-lock"></i> </span>
+					<input class="form-control" type="password" placeholder="Password">
+				</div>
+				
+				</br>						
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4">
+					<button id="btnInvia" class="btn btn-lg btn-primary btn-block" type="button">Registrati</button>
+				</div>
+				<div class="col-sm-4"></div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

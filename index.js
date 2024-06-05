@@ -10,6 +10,14 @@ $(document).ready(function () {
     const sezPrenotazione = $("#prenotazione");
     sezPrenotazione.hide();
 
+    $("#Alogout").on("click", function () {
+		const request = inviaRichiesta("POST", "server/logout.php")
+		request.catch(errore)
+		request.then(function () {
+			alert("logout eseguito correttamente")
+			window.location.href = "login.html"
+		})
+	})
 
     const checkInPicker = flatpickr("#check-in", {
         dateFormat: "Y-m-d",
