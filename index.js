@@ -31,6 +31,26 @@ $(document).ready(function () {
     
     sezDettagli.hide();
     $("#Aaccedi").show();
+    /*let requestUtenti = inviaRichiesta("POST", "../server/login.php", {
+            username: username,
+            password: password
+        });
+
+        requestUtenti.then(function (response) {
+            let users = response.data;
+            console.log(users)
+            $(".limiter").hide();
+            $("#header").show();
+            $("#welcome-section").css("visibility", "visible");
+            $("#welcome-section").show();
+            $("main").show();
+            let data = Object.values(users)[3];
+            name = Object.values(users)[1];
+            $("#userLogin").text(name + ", Che viaggio hai in mente?");
+            $("#profile-icon").prop("src", "../img/utenti/" + data.replace(/\s+/g, ""));
+        }).catch(function (error) {
+            console.log(error);
+        });*/
 
     $("#Alogout").on("click", function () {
         const request = inviaRichiesta("POST", "server/logout.php")
