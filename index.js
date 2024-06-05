@@ -12,13 +12,23 @@ $(document).ready(function () {
     const $adults = $('input[type="number"][placeholder="Adulti"]');
     const $children = $('input[type="number"][placeholder="Bambini"]');
     const sezDettagli = $("#prenotazione");
-    let tipoStanza;
     let citta;
     let checkIn;
     let checkOut;
     let adults;
     let children;
-    let prezzoStimato = 0;
+    let prezzoStimato;
+
+    let ID = null;
+    let GLOBAL_HOTEL;
+    let GLOBAL_USER = 4;
+    let GLOBAL_NPERSONE;
+    let GLOBAL_TIPOSTANZA;
+    let GLOBAL_PPP;
+    let GLOBAL_PRICE;
+
+    $("#btnPrenota").on("click", function(){prenota(ID, GLOBAL_HOTEL, GLOBAL_USER, checkIn, checkOut, GLOBAL_NPERSONE, GLOBAL_PPP, GLOBAL_TIPOSTANZA)})
+    
     sezDettagli.hide();
     $("#Aaccedi").show();
 
@@ -30,7 +40,7 @@ $(document).ready(function () {
             window.location.href = "login.html"
         })
     })
-    $("#btnPrenota").on("click", function(){prenota()})
+    
     //let rq = inviaRichiesta("GET","server/getUserInfo");
     //rq.catch(errore);
     //rq.then(function({data}){
@@ -124,6 +134,7 @@ $(document).ready(function () {
         })
     }
     function openDetails(codHotel) {
+        GLOBAL_HOTEL = codHotel;
         $("#hotelListSection").hide();
         $("#prenotazione").show();
         console.log(codHotel);
@@ -164,27 +175,28 @@ $(document).ready(function () {
                 select.on("change", function(){
                     if(select.val()=="stanzeSingole")
                         {
-                            tipoStanza = "stanzeSingole"
+                            GLOBAL_TIPOSTANZA = "stanzeSingole"
                             prezzoStimato = prezzoStimato+ 20;
                         }
                     else if(select.val()=="stanzeDoppie"){
-                            tipoStanza = "stanzeDoppie"
+                            GLOBAL_TIPOSTANZA = "stanzeDoppie"
                             prezzoStimato  = prezzoStimato+ 40;
                         }
                     else if(select.val()=="stanzeTriple"){
-                            tipoStanza = "stanzeTriple"
+                            GLOBAL_TIPOSTANZA = "stanzeTriple"
                             prezzoStimato = prezzoStimato+ 60;
                         }
                     else if(select.val()=="stanzeQuadruple"){
-                            tipoStanza = "stanzeQuadruple"
+                            GLOBAL_TIPOSTANZA = "stanzeQuadruple"
                             prezzoStimato  = prezzoStimato+ 80;
                         }
                     else if(select.val()=="suites"){
-                            tipoStanza = "suites"
+                            GLOBAL_TIPOSTANZA = "suites"
                             prezzoStimato = prezzoStimato+100;
                         } 
                         console.log(prezzoStimato); 
                         $("#pPrezzo").text(`Prezzo: ${prezzoStimato}€`);   
+                        GLOBAL_PRICE = prezzoStimato;
                 })
                 select.prop("selectedIndex", -1);
                 
@@ -202,8 +214,10 @@ $(document).ready(function () {
                             var diffDays = Math.ceil(parseInt((date2 - date1) / (24 * 3600 * 1000)));
                             console.log(diffDays);
                             prezzoStimato = parseInt(prezzo["prezzo"])*diffDays;
+
                             console.log(prezzoStimato);
                             $("#pPrezzo").text(`Prezzo: ${prezzoStimato}€`);
+                            GLOBAL_PRICE = prezzoStimato;
                         }
                         
                         detailsDiv.append($("<p>").text(`dal ${new Date(prezzo["dataInizio"]).toLocaleDateString()} al ${new Date(prezzo["dataFine"]).toLocaleDateString()} € ${prezzo["prezzo"]}`));    
@@ -215,6 +229,8 @@ $(document).ready(function () {
                 $("#checkOut2").val(checkOut);
                 let sommaP = parseInt(adults) + parseInt(children);
                 $("#numeroPersone").val(sommaP);
+                GLOBAL_NPERSONE = sommaP;
+                
                 
                 rq = inviaRichiesta("GET", "server/getReviews.php",  { codHotel: hotel["codHotel"] });
                 rq.catch(errore);
@@ -251,7 +267,17 @@ $(document).ready(function () {
             });
         });
     }
-    function prenota(){
-        alert("PO PO POVERI");
+    function prenota(id, codHotel, codUtente, dataInizio, dataFine, nPersone, prezzoPerPersona, tipoStanza){
+
+        prezzoPerPersona = Math.floor(GLOBAL_PRICE/GLOBAL_NPERSONE);
+        console.log(id, codHotel, codUtente, dataInizio, dataFine, nPersone, prezzoPerPersona, tipoStanza);
+
+        let rq = inviaRichiesta("GET", "server/inviaPrenotazione.php",
+            {id, codHotel, codUtente, dataInizio, dataFine, nPersone, prezzoPerPersona, tipoStanza}
+        );
+        rq.catch(errore);
+        rq.then(function({data}){
+           
+        });
     }
 });
