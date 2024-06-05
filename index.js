@@ -262,6 +262,7 @@ $(document).ready(function () {
                         reviewsContainer.appendTo(detailsDiv);
                     });
                 });
+                $("<button>").addClass("btn btn-primary").on("click", function(){aggiungiRecensione()}).appendTo(detailsDiv).text("Scrivi una recensione");
                 detailsContainer.append(detailsDiv);
                 
             });
@@ -277,7 +278,70 @@ $(document).ready(function () {
         );
         rq.catch(errore);
         rq.then(function({data}){
-           
+           alert("Prenotazione effettuata con successo!");
+        });
+    }
+    function aggiungiRecensione(){
+        Swal.fire({
+            title: 'Scrivi una Recensione',
+            html: `
+                <textarea id="reviewText" class="swal2-textarea" placeholder="Scrivi la tua recensione qui..."></textarea>
+                <br>
+                <label for="reviewStars">Stelle:</label>
+                <select id="reviewStars" class="swal2-select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            `,
+            showCancelButton: true,
+            confirmButtonText: 'Invia',
+            cancelButtonText: 'Annulla',
+            preConfirm: () => {
+                const reviewText = document.getElementById('reviewText').value;
+                const reviewStars = document.getElementById('reviewStars').value;
+                if (!reviewText || !reviewStars) {
+                    Swal.showValidationMessage('Per favore inserisci sia la recensione che le stelle');
+                    return false;
+                }
+                return {
+                    reviewText: reviewText,
+                    reviewStars: reviewStars
+                };
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const { reviewText, reviewStars } = result.value;
+                console.log('Recensione:', reviewText);
+                console.log('Stelle:', reviewStars);
+                let id = null;
+                let codHotel = GLOBAL_HOTEL;
+                let codUtente = 4;
+                let stelle = reviewStars;
+                let testoRecensione = reviewText;
+
+                const currentDate = new Date();
+
+                const year = currentDate.getFullYear();
+                const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+                const day = String(currentDate.getDate()).padStart(2, '0');
+
+                const hours = String(currentDate.getHours()).padStart(2, '0');
+                const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+                const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+
+                const data = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+                console.log("TUTTO: ", id, codHotel, codUtente, stelle, testoRecensione, data);
+                let rq = inviaRichiesta("GET", "server/inviaRecensione.php",
+                {id, codHotel, codUtente, stelle, testoRecensione, data});
+                rq.catch(errore);
+                rq.then(function({data}){
+                    alert("Recensione inviata con successo")
+                });
+            }
         });
     }
 });
