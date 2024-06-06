@@ -20,28 +20,6 @@ Questo progetto è un clone del popolare sito di prenotazione viaggi, Booking.co
 - **PHP**: Per lo scripting lato server e l'interazione con il database.
 - **SQL**: Per la gestione del database e il recupero dei dati.
 
-## Istruzioni per l'Installazione
-
-1. **Clonare il repository**:
-    ```sh
-    git clone https://github.com/Alessandria/booking-clone.git
-    ```
-2. **Navigare nella directory del progetto**:
-    ```sh
-    cd booking-clone
-    ```
-3. **Configurare il database**:
-    - Creare un database nel proprio server SQL.
-    - Importare il file `booking.sql` per creare le tabelle e inserire i dati di esempio.
-    ```sh
-    mysql -u username -p database_name < db/booking.sql
-    ```
-4. **Configurare il server**:
-    - Assicurarsi che il server supporti PHP e abbia accesso al database.
-    - Aggiornare le impostazioni di connessione al database nei file `search.php` e `offers.php` se necessario.
-5. **Aprire il progetto nel browser**:
-    - Se si utilizza un server locale, navigare su `http://localhost/booking-clone/index.html`.
-
 ## Utilizzo
 
 - **Home Page**: Contiene un modulo di ricerca in cui gli utenti possono inserire i dettagli del loro viaggio.
