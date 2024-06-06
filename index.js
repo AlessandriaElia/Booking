@@ -1,5 +1,6 @@
 "use strict";
-$(document).ready(function () {
+window.onload = async function () {
+    await caricaGoogleMaps();
     let rq /*= inviaRichiesta("GET", "server/checkSession.php");
     rq.catch(errore);
     rq.then(function({data}){
@@ -20,7 +21,7 @@ $(document).ready(function () {
     let adults;
     let children;
     let prezzoStimato;
-
+    let indirizzo;
     let ID = null;
     let GLOBAL_HOTEL;
     let GLOBAL_USER = 4;
@@ -29,15 +30,17 @@ $(document).ready(function () {
     let GLOBAL_PPP;
     let GLOBAL_PRICE;
     let idUtente
+    let divMappa = $("#divMappa").get(0);
+
     
 
     $("#btnPrenota").on("click", function(){prenota(ID, GLOBAL_HOTEL, GLOBAL_USER, checkIn, checkOut, GLOBAL_NPERSONE, GLOBAL_PPP, GLOBAL_TIPOSTANZA)})
-    rq = inviaRichiesta("GET", "server/getDatiUtente.php");
+    /*rq = inviaRichiesta("GET", "server/getDatiUtente.php");
     rq.catch(errore);
     rq.then(function({data}){
         console.log("DATI UTENTE", data);
         idUtente = data["codUtente"];
-    })
+    })*/
     
     sezDettagli.hide();
     $("#Aaccedi").show();
@@ -173,6 +176,8 @@ $(document).ready(function () {
         rq.catch(errore);
         rq.then(function ({ data }) {
             data.forEach(function (hotel) {
+                indirizzo = `${hotel["citta"]}, ${hotel["indirizzo"]}`; 
+                console.log("Indirizzo: ", indirizzo);
                 const detailsContainer = $("#detailsContainer");
                 detailsContainer.empty(); 
      
@@ -201,6 +206,10 @@ $(document).ready(function () {
                 option = $("<option>").val("stanzeTriple").text(`Stanze Triple (${hotel["stanzeTriple"]})`).appendTo(select);
                 option = $("<option>").val("stanzeQuadruple").text(`Stanze Quadruple (${hotel["stanzeQuadruple"]})`).appendTo(select);
                 option = $("<option>").val("suites").text(`Suites (${hotel["suites"]})`).appendTo(select).append($("<br>"));
+
+                $("<button>").addClass("btn btn-primary").on("click", function(){aggiungiRecensione()}).appendTo(detailsDiv).text("Scrivi una recensione");
+                $("<button>").addClass("btn btn-primary").on("click", function(){visualizzaMappa(indirizzo)}).appendTo(detailsDiv).text("Visualizza location").css("margin", "10px");
+                
                 
                 select.on("change", function(){
                     if(select.val()=="stanzeSingole")
@@ -229,9 +238,8 @@ $(document).ready(function () {
                         GLOBAL_PRICE = prezzoStimato;
                 })
                 select.prop("selectedIndex", -1);
+                detailsDiv.append($("<h4>").text("Tariffe")) ;
                 
-
-                detailsDiv.append($("<h4>").text("Tariffe"));
                 rq = inviaRichiesta("GET", "server/getTariffe.php", { codHotel: hotel["codHotel"] })
                 rq.catch(errore);
                 rq.then(function({data}){
@@ -250,7 +258,7 @@ $(document).ready(function () {
                             GLOBAL_PRICE = prezzoStimato;
                         }
                         
-                        detailsDiv.append($("<p>").text(`dal ${new Date(prezzo["dataInizio"]).toLocaleDateString()} al ${new Date(prezzo["dataFine"]).toLocaleDateString()} € ${prezzo["prezzo"]}`));    
+                        detailsDiv.append($("<p>").text(`dal ${new Date(prezzo["dataInizio"]).toLocaleDateString()} al ${new Date(prezzo["dataFine"]).toLocaleDateString()} € ${prezzo["prezzo"]}`));  
                     }
                 })
                 
@@ -288,11 +296,11 @@ $(document).ready(function () {
                         reviewCard.append(cardHeader, cardBody, footer);
                         reviewsContainer.append(reviewCard);
                         reviewsContainer.appendTo(detailsDiv);
-                        $("<div>").prop("id", "map").css("height", "250px").css("width", "250px");
 
                     });
                 });
-                $("<button>").addClass("btn btn-primary").on("click", function(){aggiungiRecensione()}).appendTo(detailsDiv).text("Scrivi una recensione");
+                
+                
                 detailsContainer.append(detailsDiv);
                 
             });
@@ -374,4 +382,28 @@ $(document).ready(function () {
             }
         });
     }
-});
+    function visualizzaMappa(indirizzo){
+        alert(indirizzo);
+        let geocoder = new google.maps.Geocoder();
+        geocoder.geocode( {"address": indirizzo}, function(results, status) {
+            console.log("results", results);
+            if (status == google.maps.GeocoderStatus.OK){
+                let mapOptions = {
+                    center: results[0].geometry.location,
+                    zoom: 16,
+                    };
+
+                
+
+                let googleMap = new google.maps.Map(divMappa, mapOptions); 
+
+                Swal.fire({
+                    html: divMappa
+                });
+                }
+                
+        });
+    }
+        
+    
+};
