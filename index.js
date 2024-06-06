@@ -32,16 +32,16 @@ window.onload = async function () {
     let idUtente
     let divMappa = $("#divMappa").get(0);
 
-    
 
-    $("#btnPrenota").on("click", function(){prenota(ID, GLOBAL_HOTEL, GLOBAL_USER, checkIn, checkOut, GLOBAL_NPERSONE, GLOBAL_PPP, GLOBAL_TIPOSTANZA)})
+
+    $("#btnPrenota").on("click", function () { prenota(ID, GLOBAL_HOTEL, GLOBAL_USER, checkIn, checkOut, GLOBAL_NPERSONE, GLOBAL_PPP, GLOBAL_TIPOSTANZA) })
     /*rq = inviaRichiesta("GET", "server/getDatiUtente.php");
     rq.catch(errore);
     rq.then(function({data}){
         console.log("DATI UTENTE", data);
         idUtente = data["codUtente"];
     })*/
-    
+
     sezDettagli.hide();
     $("#Aaccedi").show();
     /*let requestUtenti = inviaRichiesta("POST", "../server/login.php", {
@@ -73,7 +73,7 @@ window.onload = async function () {
             window.location.href = "login.html"
         })
     })
-    
+
     //let rq = inviaRichiesta("GET","server/getUserInfo");
     //rq.catch(errore);
     //rq.then(function({data}){
@@ -82,7 +82,6 @@ window.onload = async function () {
     //a.appendTo(li);
     //li.appendTo($("#sessionNav"));
     //})
-
     const checkInPicker = flatpickr("#check-in", {
         dateFormat: "Y-m-d",
         minDate: "today",
@@ -120,11 +119,11 @@ window.onload = async function () {
         event.preventDefault(); //sennó mi resettava il form
 
         sezDettagli.hide();
-         citta = selectCitta.val();
-         checkIn = $checkInDate.val();
-         checkOut = $checkOutDate.val();
-         adults = $adults.val();
-         children = $children.val() || 0;
+        citta = selectCitta.val();
+        checkIn = $checkInDate.val();
+        checkOut = $checkOutDate.val();
+        adults = $adults.val();
+        children = $children.val() || 0;
 
         console.log(citta, checkIn, checkOut, adults, children);
 
@@ -171,19 +170,19 @@ window.onload = async function () {
         $("#hotelListSection").hide();
         $("#prenotazione").show();
         console.log(codHotel);
-        
+
         let rq = inviaRichiesta("GET", "server/getDetails.php", { codHotel });
         rq.catch(errore);
         rq.then(function ({ data }) {
             data.forEach(function (hotel) {
-                indirizzo = `${hotel["citta"]}, ${hotel["indirizzo"]}`; 
+                indirizzo = `${hotel["citta"]}, ${hotel["indirizzo"]}`;
                 console.log("Indirizzo: ", indirizzo);
                 const detailsContainer = $("#detailsContainer");
-                detailsContainer.empty(); 
-     
+                detailsContainer.empty();
+
                 detailsContainer.append($("<h4>").addClass("text-center").text(hotel["nomeHotel"]));
                 detailsContainer.append($("<p>").addClass("text-center").text(hotel["indirizzo"]));
-    
+
                 const imgDiv = $("<div>", { class: "d-flex justify-content-center" });
                 for (let i = 0; i < 3; i++) {
                     const img = $("<img>", {
@@ -195,7 +194,7 @@ window.onload = async function () {
                     imgDiv.append(img);
                 }
                 detailsContainer.append(imgDiv);
-    
+
                 const detailsDiv = $("<div>", { class: "mt-3" });
                 detailsDiv.append($("<p>").text(hotel["descrizione"]));
 
@@ -207,146 +206,145 @@ window.onload = async function () {
                 option = $("<option>").val("stanzeQuadruple").text(`Stanze Quadruple (${hotel["stanzeQuadruple"]})`).appendTo(select);
                 option = $("<option>").val("suites").text(`Suites (${hotel["suites"]})`).appendTo(select).append($("<br>"));
 
-                $("<button>").addClass("btn btn-primary").on("click", function(){aggiungiRecensione()}).appendTo(detailsDiv).text("Scrivi una recensione");
-                $("<button>").addClass("btn btn-primary").on("click", function(){visualizzaMappa(indirizzo)}).appendTo(detailsDiv).text("Visualizza location").css("margin", "10px");
-                
-                
-                select.on("change", function(){
-                    if(select.val()=="stanzeSingole")
-                        {
-                            GLOBAL_TIPOSTANZA = "stanzeSingole"
-                            prezzoStimato = prezzoStimato+ 20;
-                        }
-                    else if(select.val()=="stanzeDoppie"){
-                            GLOBAL_TIPOSTANZA = "stanzeDoppie"
-                            prezzoStimato  = prezzoStimato+ 40;
-                        }
-                    else if(select.val()=="stanzeTriple"){
-                            GLOBAL_TIPOSTANZA = "stanzeTriple"
-                            prezzoStimato = prezzoStimato+ 60;
-                        }
-                    else if(select.val()=="stanzeQuadruple"){
-                            GLOBAL_TIPOSTANZA = "stanzeQuadruple"
-                            prezzoStimato  = prezzoStimato+ 80;
-                        }
-                    else if(select.val()=="suites"){
-                            GLOBAL_TIPOSTANZA = "suites"
-                            prezzoStimato = prezzoStimato+100;
-                        } 
-                        console.log(prezzoStimato); 
-                        $("#pPrezzo").text(`Prezzo: ${prezzoStimato}€`);   
-                        GLOBAL_PRICE = prezzoStimato;
+                $("<button>").addClass("btn btn-primary").on("click", function () { aggiungiRecensione() }).appendTo(detailsDiv).text("Scrivi una recensione");
+                $("<button>").addClass("btn btn-primary").on("click", function () { visualizzaMappa(indirizzo) }).appendTo(detailsDiv).text("Visualizza location").css("margin", "10px");
+
+
+                select.on("change", function () {
+                    if (select.val() == "stanzeSingole") {
+                        GLOBAL_TIPOSTANZA = "stanzeSingole"
+                        prezzoStimato = prezzoStimato + 20;
+                    }
+                    else if (select.val() == "stanzeDoppie") {
+                        GLOBAL_TIPOSTANZA = "stanzeDoppie"
+                        prezzoStimato = prezzoStimato + 40;
+                    }
+                    else if (select.val() == "stanzeTriple") {
+                        GLOBAL_TIPOSTANZA = "stanzeTriple"
+                        prezzoStimato = prezzoStimato + 60;
+                    }
+                    else if (select.val() == "stanzeQuadruple") {
+                        GLOBAL_TIPOSTANZA = "stanzeQuadruple"
+                        prezzoStimato = prezzoStimato + 80;
+                    }
+                    else if (select.val() == "suites") {
+                        GLOBAL_TIPOSTANZA = "suites"
+                        prezzoStimato = prezzoStimato + 100;
+                    }
+                    console.log(prezzoStimato);
+                    $("#pPrezzo").text(`Prezzo: ${prezzoStimato}€`);
+                    GLOBAL_PRICE = prezzoStimato;
                 })
                 select.prop("selectedIndex", -1);
-                detailsDiv.append($("<h4>").text("Tariffe")) ;
-                
+                detailsDiv.append($("<h4>").text("Tariffe"));
+
                 rq = inviaRichiesta("GET", "server/getTariffe.php", { codHotel: hotel["codHotel"] })
                 rq.catch(errore);
-                rq.then(function({data}){
+                rq.then(function ({ data }) {
                     for (const prezzo of data) {
-                        if(checkIn>=prezzo["dataInizio"]&&checkIn<=prezzo["dataFine"]){
+                        if (checkIn >= prezzo["dataInizio"] && checkIn <= prezzo["dataFine"]) {
                             var date1 = new Date(checkIn);
                             var date2 = new Date(checkOut);
-                            
+
                             var timeDiff = Math.abs(date1.getTime() - date2.getTime());
                             var diffDays = Math.ceil(parseInt((date2 - date1) / (24 * 3600 * 1000)));
                             console.log(diffDays);
-                            prezzoStimato = parseInt(prezzo["prezzo"])*diffDays;
+                            prezzoStimato = parseInt(prezzo["prezzo"]) * diffDays;
 
                             console.log(prezzoStimato);
                             $("#pPrezzo").text(`Prezzo: ${prezzoStimato}€`);
                             GLOBAL_PRICE = prezzoStimato;
                         }
-                        
-                        detailsDiv.append($("<p>").text(`dal ${new Date(prezzo["dataInizio"]).toLocaleDateString()} al ${new Date(prezzo["dataFine"]).toLocaleDateString()} € ${prezzo["prezzo"]}`));  
+
+                        detailsDiv.append($("<p>").text(`dal ${new Date(prezzo["dataInizio"]).toLocaleDateString()} al ${new Date(prezzo["dataFine"]).toLocaleDateString()} € ${prezzo["prezzo"]}`));
                     }
                 })
-                
-                
+
+
                 $("#checkIn2").val(checkIn);
                 $("#checkOut2").val(checkOut);
                 let sommaP = parseInt(adults) + parseInt(children);
                 $("#numeroPersone").val(sommaP);
                 GLOBAL_NPERSONE = sommaP;
-                
-                
-                rq = inviaRichiesta("GET", "server/getReviews.php",  { codHotel: hotel["codHotel"] });
+
+
+                rq = inviaRichiesta("GET", "server/getReviews.php", { codHotel: hotel["codHotel"] });
                 rq.catch(errore);
-                rq.then(function({ data }) {
+                rq.then(function ({ data }) {
                     console.log("REVIEW", data);
                     const reviewsContainer = $("<div>").addClass("mt-3").appendTo(detailsDiv);
-                    reviewsContainer.empty(); 
+                    reviewsContainer.empty();
                     let codUtente
                     data.forEach(review => {
                         codUtente = parseInt(review["codUtente"]);
                         console.log("COD UTENTE", codUtente);
-                        rq = inviaRichiesta("GET", "server/getNomeReview.php", {codUtente})
+                        rq = inviaRichiesta("GET", "server/getNomeReview.php", { codUtente })
                         rq.catch(errore);
-                        rq.then(function({data}){
+                        rq.then(function ({ data }) {
                             console.log(data);
-                            data.forEach(user=>{
+                            data.forEach(user => {
                                 const reviewCard = $("<div>", { class: "card mb-3" });
                                 const cardBody = $("<div>", { class: "card-body" });
-                                
+
                                 const cardHeader = $("<div>", { class: "card-header" });
                                 const title = $("<h5>", { class: "card-title" }).text(`Recensione di ${user["username"]}`);
                                 let stelle = "";
-                                for (let i = 0; i <review['stelle']; i++) {
+                                for (let i = 0; i < review['stelle']; i++) {
                                     stelle += `<img src="star.png" style='width:33px; height:33px'>`;
                                 }
                                 cardHeader.append(title, stelle);
-                        
+
                                 const text = $("<p>", { class: "card-text" }).text(review.testoRecensione);
                                 const footer = $("<div>", { class: "card-footer text-muted" }).text(`Data: ${new Date(review.data).toLocaleString()}`);
-                                
+
                                 cardBody.append(text);
                                 reviewCard.append(cardHeader, cardBody, footer);
                                 reviewsContainer.append(reviewCard);
                                 reviewsContainer.appendTo(detailsDiv);
 
-                        })
-                            
-                            
+                            })
+
+
                         })
 
 
                     });
                 });
-                
-                
+
+
                 detailsContainer.append(detailsDiv);
-                
+
             });
         });
     }
-    function prenota(id, codHotel, codUtente, dataInizio, dataFine, nPersone, prezzoPerPersona, tipoStanza){
+    function prenota(id, codHotel, codUtente, dataInizio, dataFine, nPersone, prezzoPerPersona, tipoStanza) {
 
-        prezzoPerPersona = Math.floor(GLOBAL_PRICE/GLOBAL_NPERSONE);
+        prezzoPerPersona = Math.floor(GLOBAL_PRICE / GLOBAL_NPERSONE);
         console.log(id, codHotel, codUtente, dataInizio, dataFine, nPersone, prezzoPerPersona, tipoStanza);
 
         let rq = inviaRichiesta("GET", "server/inviaPrenotazione.php",
-            {id, codHotel, codUtente, dataInizio, dataFine, nPersone, prezzoPerPersona, tipoStanza}
+            { id, codHotel, codUtente, dataInizio, dataFine, nPersone, prezzoPerPersona, tipoStanza }
         );
         rq.catch(errore);
-        rq.then(function({data}){
-           alert("Prenotazione effettuata con successo!");
+        rq.then(function ({ data }) {
+            alert("Prenotazione effettuata con successo!");
         });
     }
-    function aggiungiRecensione(){
+    function aggiungiRecensione() {
         Swal.fire({
             title: 'Scrivi una Recensione',
             html: `
-                <textarea id="reviewText" class="swal2-textarea" placeholder="Scrivi la tua recensione qui..."></textarea>
-                <br>
-                <label for="reviewStars">Stelle:</label>
-                <select id="reviewStars" class="swal2-select">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            `,
+                                                    <textarea id="reviewText" class="swal2-textarea" placeholder="Scrivi la tua recensione qui..."></textarea>
+                                                    <br>
+                                                    <label for="reviewStars">Stelle:</label>
+                                                    <select id="reviewStars" class="swal2-select">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    </select>
+                                                    `,
             showCancelButton: true,
             confirmButtonText: 'Invia',
             cancelButtonText: 'Annulla',
@@ -387,35 +385,40 @@ window.onload = async function () {
 
                 console.log("TUTTO: ", id, codHotel, codUtente, stelle, testoRecensione, data);
                 let rq = inviaRichiesta("GET", "server/inviaRecensione.php",
-                {id, codHotel, codUtente, stelle, testoRecensione, data});
+                    { id, codHotel, codUtente, stelle, testoRecensione, data });
                 rq.catch(errore);
-                rq.then(function({data}){
+                rq.then(function ({ data }) {
                     alert("Recensione inviata con successo")
                 });
             }
         });
     }
-    function visualizzaMappa(indirizzo){
+    function visualizzaMappa(indirizzo) {
         let geocoder = new google.maps.Geocoder();
-        geocoder.geocode( {"address": indirizzo}, function(results, status) {
+        geocoder.geocode({ "address": indirizzo }, function (results, status) {
             console.log("results", results);
-            if (status == google.maps.GeocoderStatus.OK){
+            if (status == google.maps.GeocoderStatus.OK) {
                 let mapOptions = {
                     center: results[0].geometry.location,
                     zoom: 16,
-                    };
+                };
 
-                
 
-                let googleMap = new google.maps.Map(divMappa, mapOptions); 
+
+                let googleMap = new google.maps.Map(divMappa, mapOptions);
 
                 Swal.fire({
                     html: divMappa
                 });
-                }
-                
+            }
+
         });
     }
-        
-    
+
+    $("#btnBarolo").on("click", function () {
+        selectCitta.val("Barolo");
+        $checkInDate.val("");
+        $checkOutDate.val("");
+    })
+
 };
