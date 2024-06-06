@@ -1,4 +1,6 @@
-# Clone di Booking.com di Alessandria Elia
+# BookItalia di Alessandria Elia
+
+![Image not found](https://github.com/AlessandriaElia/Booking/blob/main/img/logo.png)
 
 ## Panoramica
 
@@ -29,13 +31,10 @@ Questo progetto è un clone del popolare sito di prenotazione viaggi, Booking.co
 
 ![Image not found](https://github.com/AlessandriaElia/Booking/blob/main/img/s1.png)
 ![Image not found](https://github.com/AlessandriaElia/Booking/blob/main/img/s2.png)
+![Image not found](https://github.com/AlessandriaElia/Booking/blob/main/img/s3.png)
 ## Contribuire
 
 Se desideri contribuire a questo progetto, per favore fai un fork del repository e invia una pull request. Per modifiche significative, si prega di aprire prima un issue per discutere cosa si desidera cambiare.
-
-## Licenza
-
-Questo progetto è open-source e disponibile sotto la licenza MIT.
 
 ## Ringraziamenti
 
