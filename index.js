@@ -12,6 +12,8 @@ $(document).ready(function () {
     const $adults = $('input[type="number"][placeholder="Adulti"]');
     const $children = $('input[type="number"][placeholder="Bambini"]');
     const sezDettagli = $("#prenotazione");
+    const spanUsername = $("#spanUsername");
+    const imgUser = $("imgUser");
     let citta;
     let checkIn;
     let checkOut;
@@ -26,8 +28,17 @@ $(document).ready(function () {
     let GLOBAL_TIPOSTANZA;
     let GLOBAL_PPP;
     let GLOBAL_PRICE;
+    let idUtente
+    
 
     $("#btnPrenota").on("click", function(){prenota(ID, GLOBAL_HOTEL, GLOBAL_USER, checkIn, checkOut, GLOBAL_NPERSONE, GLOBAL_PPP, GLOBAL_TIPOSTANZA)})
+    alert("CIAO")
+    rq = inviaRichiesta("GET", "server/getDatiUtente.php");
+    rq.catch(errore);
+    rq.then(function({data}){
+        console.log("DATI UTENTE", data);
+        idUtente = data["codUtente"];
+    })
     
     sezDettagli.hide();
     $("#Aaccedi").show();
@@ -257,13 +268,12 @@ $(document).ready(function () {
                 rq.then(function({ data }) {
                     console.log("REVIEW", data);
                     const reviewsContainer = $("<div>").addClass("mt-3").appendTo(detailsDiv);
-                    reviewsContainer.empty(); // Pulisce il contenitore prima di aggiungere nuovi contenuti
+                    reviewsContainer.empty(); 
                     
                     data.forEach(review => {
                         const reviewCard = $("<div>", { class: "card mb-3" });
                         const cardBody = $("<div>", { class: "card-body" });
                         
-                        // Intestazione della recensione
                         const cardHeader = $("<div>", { class: "card-header" });
                         const title = $("<h5>", { class: "card-title" }).text(`Recensione #${review.id}`);
                         let stelle = "";
@@ -272,7 +282,6 @@ $(document).ready(function () {
                         }
                         cardHeader.append(title, stelle);
                 
-                        // Corpo della recensione
                         const text = $("<p>", { class: "card-text" }).text(review.testoRecensione);
                         const footer = $("<div>", { class: "card-footer text-muted" }).text(`Data: ${new Date(review.data).toLocaleString()}`);
                         
@@ -280,6 +289,8 @@ $(document).ready(function () {
                         reviewCard.append(cardHeader, cardBody, footer);
                         reviewsContainer.append(reviewCard);
                         reviewsContainer.appendTo(detailsDiv);
+                        $("<div>").prop("id", "map").css("height", "250px").css("width", "250px");
+
                     });
                 });
                 $("<button>").addClass("btn btn-primary").on("click", function(){aggiungiRecensione()}).appendTo(detailsDiv).text("Scrivi una recensione");
