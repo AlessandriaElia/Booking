@@ -352,17 +352,17 @@ window.onload = async function () {
         Swal.fire({
             title: 'Scrivi una Recensione',
             html: `
-                                                    <textarea id="reviewText" class="swal2-textarea" placeholder="Scrivi la tua recensione qui..."></textarea>
-                                                    <br>
-                                                    <label for="reviewStars">Stelle:</label>
-                                                    <select id="reviewStars" class="swal2-select">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                    <option value="5">5</option>
-                                                    </select>
-                                                    `,
+                     <textarea id="reviewText" class="swal2-textarea" placeholder="Scrivi la tua recensione qui..."></textarea>
+                    <br>
+                    <label for="reviewStars">Stelle:</label>
+                    <select id="reviewStars" class="swal2-select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    </select>
+                    `,
             showCancelButton: true,
             confirmButtonText: 'Invia',
             cancelButtonText: 'Annulla',
