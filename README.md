@@ -47,7 +47,10 @@ Questo progetto è un clone del popolare sito di prenotazione viaggi, Booking.co
 - **Home Page**: Contiene un modulo di ricerca in cui gli utenti possono inserire i dettagli del loro viaggio.
 - **Risultati della Ricerca**: Visualizza i risultati della ricerca in base all'input dell'utente.
 - **Offerte**: Elenca le promozioni e le offerte speciali attuali.
+## Preview del sito
 
+![Image not found](https://github.com/AlessandriaElia/Booking/blob/main/img/s1.png)
+![Image not found](https://github.com/AlessandriaElia/Booking/blob/main/img/s2.png)
 ## Contribuire
 
 Se desideri contribuire a questo progetto, per favore fai un fork del repository e invia una pull request. Per modifiche significative, si prega di aprire prima un issue per discutere cosa si desidera cambiare.
