@@ -32,7 +32,6 @@ $(document).ready(function () {
     
 
     $("#btnPrenota").on("click", function(){prenota(ID, GLOBAL_HOTEL, GLOBAL_USER, checkIn, checkOut, GLOBAL_NPERSONE, GLOBAL_PPP, GLOBAL_TIPOSTANZA)})
-    alert("CIAO")
     rq = inviaRichiesta("GET", "server/getDatiUtente.php");
     rq.catch(errore);
     rq.then(function({data}){
