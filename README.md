@@ -1,4 +1,4 @@
-# Clone di Booking.com di Alessandria Elia
+# BookItalia di Alessandria Elia
 
 ## Panoramica
 
