@@ -7,7 +7,7 @@ $codHotel = getValidParameter("codHotel", $conn);
 
 $sql = "SELECT prezzo,dataInizio,dataFine
         FROM tariffe
-        WHERE codHotel = '$codHotel'";
+        WHERE codHotel = $codHotel";
 $data = eseguiQuery($conn, $sql);
 
 http_response_code(200);

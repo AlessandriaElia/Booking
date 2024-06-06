@@ -3,11 +3,11 @@ header("Content-type: application/json; charset=utf-8");
 require_once("mysqli.php");
 $conn = apriConnessione("booking");
 
-$codHotel = getValidParameter("codHotel", $conn);
+$codUtente = getValidParameter("codUtente", $conn);
 
 $sql = "SELECT *
-        FROM recensioni
-        WHERE codHotel = $codHotel";
+        FROM utenti
+        WHERE codUtente = $codUtente";
 $data = eseguiQuery($conn, $sql);
 
 http_response_code(200);

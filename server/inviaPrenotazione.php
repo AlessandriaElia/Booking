@@ -13,7 +13,7 @@ $tipoStanza = getValidParameter("tipoStanza", $conn);
 
 $sql = "INSERT INTO prenotazioni 
         (id, codHotel, codUtente, dataInizio, dataFine, nPersone, prezzoPerPersona, tipoStanza)
-        VALUES (NULL, '$codHotel', '$codUtente', '$dataInizio', '$dataFine', '$nPersone', '$prezzoPerPersona', '$tipoStanza')";
+        VALUES (NULL, $codHotel, $codUtente, '$dataInizio', '$dataFine', $nPersone, $prezzoPerPersona, '$tipoStanza')";
 
 $data = eseguiQuery($conn, $sql);
 

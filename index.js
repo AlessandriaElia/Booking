@@ -276,26 +276,39 @@ window.onload = async function () {
                     console.log("REVIEW", data);
                     const reviewsContainer = $("<div>").addClass("mt-3").appendTo(detailsDiv);
                     reviewsContainer.empty(); 
-                    
+                    let codUtente
                     data.forEach(review => {
-                        const reviewCard = $("<div>", { class: "card mb-3" });
-                        const cardBody = $("<div>", { class: "card-body" });
+                        codUtente = parseInt(review["codUtente"]);
+                        console.log("COD UTENTE", codUtente);
+                        rq = inviaRichiesta("GET", "server/getNomeReview.php", {codUtente})
+                        rq.catch(errore);
+                        rq.then(function({data}){
+                            console.log(data);
+                            data.forEach(user=>{
+                                const reviewCard = $("<div>", { class: "card mb-3" });
+                                const cardBody = $("<div>", { class: "card-body" });
+                                
+                                const cardHeader = $("<div>", { class: "card-header" });
+                                const title = $("<h5>", { class: "card-title" }).text(`Recensione di ${user["username"]}`);
+                                let stelle = "";
+                                for (let i = 0; i <review['stelle']; i++) {
+                                    stelle += `<img src="star.png" style='width:33px; height:33px'>`;
+                                }
+                                cardHeader.append(title, stelle);
                         
-                        const cardHeader = $("<div>", { class: "card-header" });
-                        const title = $("<h5>", { class: "card-title" }).text(`Recensione #${review.id}`);
-                        let stelle = "";
-                        for (let i = 0; i <review['stelle']; i++) {
-                            stelle += `<img src="star.png" style='width:33px; height:33px'>`;
-                        }
-                        cardHeader.append(title, stelle);
-                
-                        const text = $("<p>", { class: "card-text" }).text(review.testoRecensione);
-                        const footer = $("<div>", { class: "card-footer text-muted" }).text(`Data: ${new Date(review.data).toLocaleString()}`);
-                        
-                        cardBody.append(text);
-                        reviewCard.append(cardHeader, cardBody, footer);
-                        reviewsContainer.append(reviewCard);
-                        reviewsContainer.appendTo(detailsDiv);
+                                const text = $("<p>", { class: "card-text" }).text(review.testoRecensione);
+                                const footer = $("<div>", { class: "card-footer text-muted" }).text(`Data: ${new Date(review.data).toLocaleString()}`);
+                                
+                                cardBody.append(text);
+                                reviewCard.append(cardHeader, cardBody, footer);
+                                reviewsContainer.append(reviewCard);
+                                reviewsContainer.appendTo(detailsDiv);
+
+                        })
+                            
+                            
+                        })
+
 
                     });
                 });
@@ -383,7 +396,6 @@ window.onload = async function () {
         });
     }
     function visualizzaMappa(indirizzo){
-        alert(indirizzo);
         let geocoder = new google.maps.Geocoder();
         geocoder.geocode( {"address": indirizzo}, function(results, status) {
             console.log("results", results);
