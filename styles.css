@@ -172,6 +172,9 @@ button.btn-primary:hover {
 .scegliDate span{
     font-size: 15pt;
 }
+.round {
+    border-radius: 50%;
+}
 
 
 

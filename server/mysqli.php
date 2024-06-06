@@ -1,5 +1,5 @@
 <?php
-define("SCADENZA", 300);
+define("SCADENZA", 10000);
 
 function apriConnessione($DBName)
 {

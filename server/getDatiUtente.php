@@ -18,7 +18,9 @@ $sql = "SELECT *
 $data = eseguiQuery($conn, $sql);
 
 
-$response = array("user"=>$data[0]["username"]);
+$response = array("user"=>$data[0]["username"],
+"img" => $data[0]["imgProfilo"]
+);
 
 http_response_code(200);
 echo (json_encode($response));

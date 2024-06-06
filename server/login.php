@@ -1,7 +1,7 @@
 <?php
 header("Content-type: application/json; charset=utf-8");
 require_once("mysqli.php");
-$conn = apriConnessione();
+$conn = apriConnessione("booking");
 
 $username = getValidParameter("username", $conn);
 $password = getValidParameter("password", $conn);

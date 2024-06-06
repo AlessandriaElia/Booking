@@ -6,6 +6,21 @@ window.onload = async function () {
     rq.then(function({data}){
         console.log(data);
     })*/
+   let idU;
+    let idImg;
+    const request = inviaRichiesta("GET", "server/getDatiUtente.php")
+    request.catch(errore)
+    request.then(function ({ data }) {
+        console.log("ciao: ", data)
+
+        idU=data["user"];
+        idImg=data["img"];
+
+        console.log(idU,idImg);
+        $("#Aaccedi").hide();
+        $("#Alogout").show();
+        $("#imgAcc").prop("src", `img/utenti/${idImg}`);
+    })
     const selectCitta = $('.form-control[required]');
     const btnCerca = $("#btnCerca");
     const $checkInDate = $("#check-in");
@@ -14,7 +29,7 @@ window.onload = async function () {
     const $children = $('input[type="number"][placeholder="Bambini"]');
     const sezDettagli = $("#prenotazione");
     const spanUsername = $("#spanUsername");
-    const imgUser = $("imgUser");
+    const imgUser = $("#imgUser");
     let citta;
     let checkIn;
     let checkOut;
@@ -44,6 +59,7 @@ window.onload = async function () {
 
     sezDettagli.hide();
     $("#Aaccedi").show();
+    $("#Alogout").hide();
     /*let requestUtenti = inviaRichiesta("POST", "../server/login.php", {
             username: username,
             password: password
@@ -166,6 +182,8 @@ window.onload = async function () {
         })
     }
     function openDetails(codHotel) {
+        spanUsername.text(idU);
+        imgUser.prop("src", `img/utenti/${idImg}`);
         GLOBAL_HOTEL = codHotel;
         $("#hotelListSection").hide();
         $("#prenotazione").show();
@@ -389,6 +407,7 @@ window.onload = async function () {
                 rq.catch(errore);
                 rq.then(function ({ data }) {
                     alert("Recensione inviata con successo")
+                    openDetails(codHotel);
                 });
             }
         });
