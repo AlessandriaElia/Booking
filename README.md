@@ -1,5 +1,7 @@
 # BookItalia di Alessandria Elia
 
+![Image not found](https://github.com/AlessandriaElia/Booking/blob/main/img/logo.png)
+
 ## Panoramica
 
 Questo progetto è un clone del popolare sito di prenotazione viaggi, Booking.com. Permette agli utenti di cercare alloggi, voli e altri servizi legati ai viaggi. Il sito è costruito utilizzando HTML, CSS, JavaScript, PHP e SQL.
