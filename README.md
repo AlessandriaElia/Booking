@@ -34,10 +34,6 @@ Questo progetto è un clone del popolare sito di prenotazione viaggi, Booking.co
 
 Se desideri contribuire a questo progetto, per favore fai un fork del repository e invia una pull request. Per modifiche significative, si prega di aprire prima un issue per discutere cosa si desidera cambiare.
 
-## Licenza
-
-Questo progetto è open-source e disponibile sotto la licenza MIT.
-
 ## Ringraziamenti
 
 - Ispirato da [Booking.com](https://www.booking.com/).
