@@ -7,7 +7,7 @@ Questo progetto è un clone del popolare sito di prenotazione viaggi, Booking.co
 ## Funzionalità
 
 - **Interfaccia User-friendly**: Un'interfaccia pulita e intuitiva ispirata a Booking.com.
-- **Funzionalità di Ricerca**: Gli utenti possono cercare alloggi, voli e altro.
+- **Funzionalità di Ricerca**: Gli utenti possono cercare alloggi.
 - **Design Responsivo**: Il sito è completamente responsivo, offrendo un'esperienza senza soluzione di continuità su dispositivi desktop e mobili.
 - **Integrazione Backend**: I dati vengono recuperati da un database SQL utilizzando PHP.
 - **Offerte e Promozioni**: Gli utenti possono visualizzare offerte e promozioni attuali.
@@ -20,23 +20,11 @@ Questo progetto è un clone del popolare sito di prenotazione viaggi, Booking.co
 - **PHP**: Per lo scripting lato server e l'interazione con il database.
 - **SQL**: Per la gestione del database e il recupero dei dati.
 
-## Struttura del Progetto
-
-
-- `index.html`: La homepage principale del sito.
-- `styles.css`: CSS personalizzato per stilizzare il sito.
-- `scripts.js`: File JavaScript per le funzionalità lato client.
-- `search.php`: Script PHP per gestire le query di ricerca.
-- `offers.php`: Script PHP per visualizzare offerte e promozioni.
-- `db/booking.sql`: File SQL contenente lo schema del database e dati di esempio.
-- `img/`: Directory contenente le immagini utilizzate sul sito.
-- `README.md`: Questo file.
-
 ## Istruzioni per l'Installazione
 
 1. **Clonare il repository**:
     ```sh
-    git clone https://github.com/yourusername/booking-clone.git
+    git clone https://github.com/Alessandria/booking-clone.git
     ```
 2. **Navigare nella directory del progetto**:
     ```sh
